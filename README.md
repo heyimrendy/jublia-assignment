@@ -130,7 +130,7 @@ flask db upgrade
 ##### Example cURL
 
 > ```bash
-> curl -X POST -H "Content-Type: application/json" -d '{"email": "example@gmail.com"}' http://127.0.0.1:5000/api/save_emails
+> curl -X POST -H "Content-Type: application/json" -d '{"event_id": 1, "email_subject": "Lorem ipsum", "email_content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Eleifend donec pretium vulputate sapien.", "timestamp": "2024-01-01 23:59"}' http://127.0.0.1:5000/api/save_emails
 > ```
 </details>
 

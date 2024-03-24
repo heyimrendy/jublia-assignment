@@ -55,16 +55,15 @@ def create_user():
     }
 
 
-@bp.route("/user/<int:id>/events", methods=['GET'])
+@bp.route("/user/<int:id>/events", methods=["GET"])
 def get_subscriptions(id):
     user = db.session.scalar(sqlalchemy.select(User).where(User.id == id))
     if user is None:
         return error_response(404, {"user": [f"User with id {id} not found."]})
-    
+
     events = [{"id": event.id, "name": event.name} for event in user.events]
 
     return {"events": events}
-
 
 
 @bp.route("/subscribe", methods=["POST"])
@@ -180,6 +179,9 @@ def save_email():
     # dt_jst_aware = datetime.datetime.fromtimestamp(1711269984, datetime.timezone(datetime.timedelta(hours=8)))
     # print(dt_jst_aware)
 
-    save_email_task.apply_async(args=[email.id], eta=datetime.datetime.fromisoformat(f"{data['timestamp']}:00+08:00"))
+    save_email_task.apply_async(
+        args=[email.id],
+        eta=datetime.datetime.fromisoformat(f"{data['timestamp']}:00+08:00"),
+    )
 
     return {"message": "Email saved and will be sent as scheduled"}
